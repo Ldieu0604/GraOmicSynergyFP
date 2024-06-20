@@ -1,0 +1,10 @@
+pubchempy
+rdkit
+scipy
+scikit-learn
+torch==1.4.0+cu100 -f https://download.pytorch.org/whl/torch_stable.html
+torchvision==0.5.0+cu100 -f https://download.pytorch.org/whl/torch_stable.html
+torch-geometric -f https://pytorch-geometric.com/whl/torch-1.4.0.html
+torch-sparse==latest+cu100 -f https://pytorch-geometric.com/whl/torch-1.4.0.html
+torch-scatter==latest+cu100 -f https://pytorch-geometric.com/whl/torch-1.4.0.html
+torch-cluster==latest+cu100 -f https://pytorch-geometric.com/whl/torch-1.4.0.html

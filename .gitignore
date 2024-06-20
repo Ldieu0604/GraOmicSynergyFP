@@ -1,0 +1,12 @@
+*.log
+.vscode/
+.idea/
+.venv/
+*.DS_Store/
+*.ipynb_checkpoints/
+*.model
+*__pycache__/
+*/save_model/*.csv
+*/save_model/*.png
+*/save_model/*.pickle
+
