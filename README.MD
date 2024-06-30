@@ -8,7 +8,7 @@ chmod +x install.sh
 + data: GDSC dataset
 + download gen expression from this following link: https://drive.google.com/file/d/1orMkX_4xC6N8fah98nUFJSuZueHOadX4/view?usp=sharing
 
-###  source codes:
+### Source codes:
 + split_process_data.ipynb: This notebook is used to split the data into training, validation, and test sets. It employs the Kolmogorov-Smirnov statistical test (Zwillinger and Kokoska, 1999) to validate the synergy distribution between each set.
 + utils.py: This file includes the TestbedDataset, which is used by create_data.py to generate data. It also contains performance measures and functions to plot the loss and Pearson correlation coefficient by epoch.
 + models/gin_add_at_cls.ipynb, gin_add_at_rmse.ipynb: These notebooks present the proposed models, namely GINConvNet, for drug classification and regression prediction tasks. The models receive graphs as input, and the notebooks provide details about the training process.
