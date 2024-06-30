@@ -10,3 +10,6 @@
 */save_model/*.png
 */save_model/*.pickle
 
+*/models/DeepSynergy/*
+*/models/Deepdds.ipynb
+
