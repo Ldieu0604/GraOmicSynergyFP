@@ -32,9 +32,11 @@ Run process_split_data.ipynb.
 ## 2. Create data in pytorch format
 Run create_data.ipynb
 
-This will generate a file in PyTorch format (.pt) stored at data/all_test/processed. The file will include the training, validation, and test sets, with drug information converted into graphs and Gene expression, Mutation and Copy number alteration, and Methylation information converted into tensors.
+The file will include the training, validation, and test sets, with drug information converted into graphs and Gene expression, Mutation and Copy number alteration, and Methylation information converted
 
 ## 3. Train GraOmicSynergy model
 Train regression task with GIN using gin_add_at_rmse.ipynb
 
 Train classification task with GIN using gin_add_at_cls.ipynb
+
+These notebooks present the proposed models, namely GINConvNet, for drug combination classification and regression prediction tasks
