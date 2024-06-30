@@ -2,6 +2,7 @@ pubchempy
 rdkit
 scipy
 scikit-learn
+tensorflow
 torch==1.4.0+cu100 -f https://download.pytorch.org/whl/torch_stable.html
 torchvision==0.5.0+cu100 -f https://download.pytorch.org/whl/torch_stable.html
 torch-geometric -f https://pytorch-geometric.com/whl/torch-1.4.0.html
