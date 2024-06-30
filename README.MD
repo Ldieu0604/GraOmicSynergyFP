@@ -29,17 +29,12 @@ chmod +x install.sh
 ## 1. Process and split data
 Run process_split_data.ipynb.
 
-## 2. Prepair Pytorch format data
+## 2. Create data in pytorch format
 Run create_data.ipynb
 
 This will generate a file in PyTorch format (.pt) stored at data/all_test/processed. The file will include the training, validation, and test sets. It converts the drug information into a graph and converts the gene, mutation, and methylation information into a tensor.
 
-## 3. Train a GraphDRP model
-Train regression task with GIN using gin_add_at_rmse.ipynb.
+## 3. Train GraOmicSynergy model
+Train regression task with GIN using gin_add_at_rmse.ipynb
 
-Train classification task with GIN using gin_add_at_cls.ipynb.
-
-## 4. Run Deepsynergy and DeepDDS experiment
-Deepsynergy: models/DeepSynergy/cv_example/deepsynergy.py
-
-DeepDDS: Deepdds.ipynb
+Train classification task with GIN using gin_add_at_cls.ipynb
