@@ -1,7 +1,8 @@
 import os
 from math import sqrt
 from scipy import stats
-from torch_geometric.data import InMemoryDataset, DataLoader
+from torch_geometric.data import InMemoryDataset
+from torch_geometric.loader import DataLoader
 from torch_geometric import data as DATA
 import torch
 import matplotlib.pyplot as plt
@@ -18,13 +19,13 @@ class DrugCombination(DATA.Data):
         self.edge_index_2 = edge_index_2
         self.x_2 = x_2
         self.y = y
-    def __inc__(self, key, value):
+    def __inc__(self, key, value, *args, **kwargs):
         if key == 'edge_index_1':
             return self.x_1.size(0)
         if key == 'edge_index_2':
             return self.x_2.size(0)
         else:
-            return super().__inc__(key, value)
+            return super().__inc__(key, value, *args, **kwargs)
         
         
 class TestbedDataset(InMemoryDataset):
@@ -39,11 +40,11 @@ class TestbedDataset(InMemoryDataset):
         self.saliency_map = saliency_map
         if os.path.isfile(self.processed_paths[0]):
             print('Pre-processed data found: {}, loading ...'.format(self.processed_paths[0]))
-            self.data, self.slices = torch.load(self.processed_paths[0])
+            self.data, self.slices = torch.load(self.processed_paths[0], weights_only=False)
         else:
             print('Pre-processed data {} not found, doing pre-processing...'.format(self.processed_paths[0]))
             self.process(xd_1, xd_pt_1, xd_2, xd_pt_2, xt_mut, xt_meth, xt_ge, y, smile_graph)
-            self.data, self.slices = torch.load(self.processed_paths[0])
+            self.data, self.slices = torch.load(self.processed_paths[0], weights_only=False)
 
     @property
     def raw_file_names(self):
@@ -52,7 +53,7 @@ class TestbedDataset(InMemoryDataset):
 
     @property
     def processed_file_names(self):
-        return [self.dataset + '.pt']
+        return [self.dataset + '.pkl']
 
     def download(self):
         # Download to `self.raw_dir`.
@@ -74,9 +75,6 @@ class TestbedDataset(InMemoryDataset):
         data_list = []
         data_len = len(xt_ge)
         for i in range(data_len):
-#             print('Converting SMILES to graph: {}/{}'.format(i+1, data_len))
-            os.system('cls')
-
             smiles_1 = xd_1[i]
             smiles_2 = xd_2[i]
             smiles_pt_1 = xd_pt_1[i]
@@ -91,9 +89,9 @@ class TestbedDataset(InMemoryDataset):
             # make the graph ready for PyTorch Geometrics GCN algorithms:
             GCNData = DrugCombination(
                 edge_index_1=torch.LongTensor(edge_index_1).transpose(1, 0),
-                x_1=torch.Tensor(features_1),
+                x_1=torch.tensor(np.asarray(features_1), dtype=torch.float32),
                 edge_index_2=torch.LongTensor(edge_index_2).transpose(1, 0),
-                x_2=torch.Tensor(features_2),                
+                x_2=torch.tensor(np.asarray(features_2), dtype=torch.float32),
                 y=torch.FloatTensor([labels]),
                                )
             
