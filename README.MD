@@ -1,42 +1,66 @@
-# install requirements
-chmod +x install.sh
-
-./install.sh
-
+# GraOmicSynergy
 # Resources:
 + README.md: this file.
 + data: GDSC dataset
 + download gen expression from this following link: https://drive.google.com/file/d/1orMkX_4xC6N8fah98nUFJSuZueHOadX4/view?usp=sharing
 
-### Source codes:
-+ split_process_data.ipynb: This notebook is used to split the data into training, validation, and test sets. It employs the Kolmogorov-Smirnov statistical test (Zwillinger and Kokoska, 1999) to validate the synergy distribution between each set.
-+ utils.py: This file includes the TestbedDataset, which is used by create_data.py to generate data. It also contains performance measures and functions to plot the loss and Pearson correlation coefficient by epoch.
-+ models/gin_add_at_cls.ipynb, models/gin_add_at_rmse.ipynb: These notebooks present the proposed models, namely GINConvNet, for drug combination classification and regression prediction tasks. The models receive graphs as input, and the notebooks provide details about the training process.
+## Setup
 
+Use Python `3.12.3` and install the project dependencies from `requirements.txt`.
 
-## Dependencies
-+ [Tensorflow](https://www.tensorflow.org/)
-+ [Torch](https://pytorch.org/)
-+ [Pytorch_geometric](https://github.com/rusty1s/pytorch_geometric)
-+ [Rdkit](https://www.rdkit.org/)
-+ [Matplotlib](https://matplotlib.org/)
-+ [Pandas](https://pandas.pydata.org/)
-+ [Numpy](https://numpy.org/)
-+ [Scipy](https://docs.scipy.org/doc/)
+```bash
+python3.12 --version
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
 
-# Step-by-step running:
+## Resources
 
-## 1. Process and split data
-Run process_split_data.ipynb.
++ `data/`: GDSC dataset and processed splits
++ `process_split_data.ipynb`: splits the data into training, validation, and test sets
++ `create_data.ipynb`: builds the standard 2D PyTorch-format dataset
++ `create_data_with_3d.ipynb`: builds the 2D + 3D PyTorch-format dataset
++ `utils.py`: utilities for the standard pipeline
++ `utils_with_3d.py`: utilities for the 2D + 3D pipeline
++ `models/gin_add_at_cls.ipynb`, `models/gin_add_at_rmse.ipynb`: standard classification and regression training notebooks
++ `models/gin_add_at_cls_with_3d.ipynb`, `models/gin_add_at_rmse_with_3d.ipynb`: classification and regression training notebooks using the 3D-enhanced input
 
-## 2. Create data in pytorch format
-Run create_data.ipynb
+Gene expression data can be downloaded from:
+https://drive.google.com/file/d/1orMkX_4xC6N8fah98nUFJSuZueHOadX4/view?usp=sharing
 
-The file will include the training, validation, and test sets, with drug information converted into graphs and Gene expression, Mutation and Copy number alteration, and Methylation information converted
+## Workflow
 
-## 3. Train GraOmicSynergy model
-Train regression task with GIN using gin_add_at_rmse.ipynb
+### 1. Process and split the data
 
-Train classification task with GIN using gin_add_at_cls.ipynb
+Run `process_split_data.ipynb` first.
+
+This step only needs to be run once. It prepares the train/validation/test splits that are reused by both the standard pipeline and the 3D pipeline.
+
+### 2. Choose a data creation path
+
+After `process_split_data.ipynb`, you can continue with either of these paths:
+
++ Standard path: run `create_data.ipynb`, then train with the regular GIN notebooks in `models/`
++ 3D path: run `create_data_with_3d.ipynb`, then train with the `*_with_3d.ipynb` notebooks in `models/`
+
+The 3D implementation is a simple concatenation of the 3D features with the existing 2D representation, so it uses the same processed split produced by `process_split_data.ipynb`. Note that the files created by the create_data notebooks are in .pkl format, which  will include the training, validation, and test sets, with drug information converted into graphs and Gene expression, Mutation and Copy number alteration, and Methylation information converted
+
+### 3. Train the models
+
+Standard notebooks:
+
++ Regression: `models/gin_add_at_rmse.ipynb`
++ Classification: `models/gin_add_at_cls.ipynb`
+
+3D notebooks:
+
++ Regression: `models/gin_add_at_rmse_with_3d.ipynb`
++ Classification: `models/gin_add_at_cls_with_3d.ipynb`
+
+## Notes
+
+The explanations for the runtime improvements are documented inside the training notebooks in the `models/` directory.
 
 These notebooks present the proposed models, namely GINConvNet, for drug combination classification and regression prediction tasks
