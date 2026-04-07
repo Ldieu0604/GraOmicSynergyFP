@@ -1,8 +1,4 @@
 # GraOmicSynergy
-# Resources:
-+ README.md: this file.
-+ data: GDSC dataset
-+ download gen expression from this following link: https://drive.google.com/file/d/1orMkX_4xC6N8fah98nUFJSuZueHOadX4/view?usp=sharing
 
 ## Setup
 
