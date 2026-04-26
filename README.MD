@@ -17,11 +17,8 @@ python -m pip install -r requirements.txt
 + `data/`: GDSC dataset and processed splits
 + `process_split_data.ipynb`: splits the data into training, validation, and test sets
 + `create_data.ipynb`: builds the standard 2D PyTorch-format dataset
-+ `create_data_with_3d.ipynb`: builds the 2D + 3D PyTorch-format dataset
 + `utils.py`: utilities for the standard pipeline
-+ `utils_with_3d.py`: utilities for the 2D + 3D pipeline
 + `models/gin_add_at_cls.ipynb`, `models/gin_add_at_rmse.ipynb`: standard classification and regression training notebooks
-+ `models/gin_add_at_cls_with_3d.ipynb`, `models/gin_add_at_rmse_with_3d.ipynb`: classification and regression training notebooks using the 3D-enhanced input
 
 Gene expression data can be downloaded from:
 https://drive.google.com/file/d/1orMkX_4xC6N8fah98nUFJSuZueHOadX4/view?usp=sharing
@@ -32,16 +29,15 @@ https://drive.google.com/file/d/1orMkX_4xC6N8fah98nUFJSuZueHOadX4/view?usp=shari
 
 Run `process_split_data.ipynb` first.
 
-This step only needs to be run once. It prepares the train/validation/test splits that are reused by both the standard pipeline and the 3D pipeline.
+This step only needs to be run once. It prepares the train/validation/test splits reused by the standard pipeline.
 
-### 2. Choose a data creation path
+### 2. Create the dataset
 
-After `process_split_data.ipynb`, you can continue with either of these paths:
+After `process_split_data.ipynb`, run the standard data creation notebook:
 
-+ Standard path: run `create_data.ipynb`, then train with the regular GIN notebooks in `models/`
-+ 3D path: run `create_data_with_3d.ipynb`, then train with the `*_with_3d.ipynb` notebooks in `models/`
++ `create_data.ipynb`
 
-The 3D implementation is a simple concatenation of the 3D features with the existing 2D representation, so it uses the same processed split produced by `process_split_data.ipynb`. Note that the files created by the create_data notebooks are in .pkl format, which  will include the training, validation, and test sets, with drug information converted into graphs and Gene expression, Mutation and Copy number alteration, and Methylation information converted
+The generated files are in `.pkl` format and include the training, validation, and test sets, with drug information converted into graphs and Gene expression, Mutation and Copy number alteration, and Methylation information converted
 
 ### 3. Train the models
 
@@ -49,11 +45,6 @@ Standard notebooks:
 
 + Regression: `models/gin_add_at_rmse.ipynb`
 + Classification: `models/gin_add_at_cls.ipynb`
-
-3D notebooks:
-
-+ Regression: `models/gin_add_at_rmse_with_3d.ipynb`
-+ Classification: `models/gin_add_at_cls_with_3d.ipynb`
 
 ## Notes
 
