@@ -1,24 +1,13 @@
---extra-index-url https://download.pytorch.org/whl/cu121
--f https://data.pyg.org/whl/torch-2.5.1+cu121.html
-
-pubchempy
-rdkit
-seaborn
-scipy
-scikit-learn
-tensorflow
-torch==2.5.1+cu121
-torchvision==0.20.1+cu121
-torchaudio==2.5.1+cu121
-torch-geometric
-pyg_lib
-torch-sparse
-torch-scatter
-torch-cluster
-pandas
-matplotlib
-ipywidgets
-h5py
-networkx
-numpy
-tqdm
+networkx==3.6.1
+h5py==3.14.0
+pubchempy==1.0.5
+numpy==2.4.4
+scipy==1.17.1
+pandas==3.0.2
+scikit-learn==1.8.0
+matplotlib==3.10.9
+seaborn==0.13.2
+ipykernel==7.2.0
+ipywidgets==8.1.8
+tqdm==4.67.3
+optuna==4.6.0
