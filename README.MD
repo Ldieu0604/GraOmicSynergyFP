@@ -29,7 +29,7 @@ After `process_split_data.ipynb`, run the standard data creation notebook:
 
 + `create_data.ipynb`
 
-The generated files are in `.pkl` format and include the training, validation, and test sets, with drug information converted into graphs and Gene expression, Mutation and Copy number alteration, and Methylation information converted.
+The generated files are in `.pt` format and include the training, validation, and test sets, with drug information converted into graphs and Gene expression, Mutation and Copy number alteration, and Methylation information converted.
 
 ### 3. Train the models
 
