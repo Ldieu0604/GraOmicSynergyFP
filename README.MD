@@ -2,16 +2,8 @@
 
 ## Setup
 
-Use Python `3.12.3` and install the project dependencies from `requirements.txt`.
-
-```bash
-python3.12 --version
-python3.12 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-```
-
+Use Python 3.13 and install the project dependencies from `requirements.txt`.
+Also for additional dependencies run install.sh
 ## Resources
 
 + `data/`: GDSC dataset and processed splits
@@ -37,7 +29,7 @@ After `process_split_data.ipynb`, run the standard data creation notebook:
 
 + `create_data.ipynb`
 
-The generated files are in `.pkl` format and include the training, validation, and test sets, with drug information converted into graphs and Gene expression, Mutation and Copy number alteration, and Methylation information converted
+The generated files are in `.pkl` format and include the training, validation, and test sets, with drug information converted into graphs and Gene expression, Mutation and Copy number alteration, and Methylation information converted.
 
 ### 3. Train the models
 
