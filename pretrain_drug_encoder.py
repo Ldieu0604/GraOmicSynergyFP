@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.loader import DataLoader
 from torch_geometric.nn import GINConv
-from torch_scatter import scatter_mean  # <-- THÊM THƯ VIỆN NÀY ĐỂ TÍNH FRAGPOOL SIÊU TỐC
+from torch_scatter import scatter_mean 
 from mol_bpe import Tokenizer
 from utils import TestbedDataset
 
@@ -103,7 +103,6 @@ def run_pretraining(epochs=50, batch_size=256):
     model = DualViewPretrainer(atom_in_dim=78, frag_in_dim=FRAG_VOCAB_SIZE, hidden_dim=128).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     
-    # 2. Tải dữ liệu (XÓA BỎ DÒNG torch.load DƯ THỪA)
     print("Đang khởi tạo TestbedDataset...")
     dataset = TestbedDataset(root="data/split_data/all_test", dataset="GDSC_train_dc")
     loader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
